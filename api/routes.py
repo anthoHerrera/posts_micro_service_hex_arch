@@ -1,8 +1,8 @@
 from flask import Blueprint, request, jsonify
-from app.application.user_service import UserService
-from app.application.post_service import PostService
-from app.infrastructure.user_repository import UserRepository
-from app.infrastructure.post_repository import PostRepository
+from application.user_service import UserService
+from application.post_service import PostService
+from infrastructure.user_repository import UserRepository
+from infrastructure.post_repository import PostRepository
 
 user_repository = UserRepository()
 post_repository = PostRepository()
@@ -19,7 +19,7 @@ def create_user():
     if not data.get("name") or not data.get("email"):
         return jsonify({"error": "name and email are required"}), 400
     user = user_service.create_user(data["name"], data["email"])
-    return jsonify(user.__dict__), 201
+    return jsonify(user.to_dict()), 201
 
 @api_bp.route("/posts", methods=["POST"])
 def create_post():
@@ -27,4 +27,4 @@ def create_post():
     if not data.get("title") or not data.get("content") or not data.get("user_id"):
         return jsonify({"error": "title, content and user_id are required"}), 400
     post = post_service.create_post(data["title"], data["content"], data["user_id"])
-    return jsonify(post.__dict__), 201
+    return jsonify(post.to_dict()), 201

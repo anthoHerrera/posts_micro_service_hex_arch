@@ -1,5 +1,5 @@
-from app.domain.user import User
-from app.infrastructure.user_repository import UserRepository
+from domain.user import User
+from infrastructure.user_repository import UserRepository
 
 
 class UserService:

@@ -1,6 +1,6 @@
 from typing import List
-from app.domain.post import Post
-from app.infrastructure.database import db
+from domain.post import Post
+from infrastructure.database import db
 
 class PostRepository:
     def save(self, post: Post) -> Post:

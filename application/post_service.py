@@ -1,5 +1,5 @@
-from app.domain.post import Post
-from app.infrastructure.post_repository import PostRepository
+from domain.post import Post
+from infrastructure.post_repository import PostRepository
 
 
 class PostService:

@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String
-from app.infrastructure.database import Base
+from infrastructure.database import Base
 
 class User(Base):
     __tablename__ = "users"
@@ -10,4 +10,12 @@ class User(Base):
     
     def __repr__(self):
         return f"<User {self.name})>"
+    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "email": self.email
+        }
+        
     

@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
-from app.infrastructure.database import Base
+from infrastructure.database import Base
 from sqlalchemy.orm import relationship
 
 class Post(Base):
@@ -8,7 +8,16 @@ class Post(Base):
     title = Column(String)
     content = Column(String)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    author = relationship("User", back_ref="posts", lazy=True)
+    author = relationship("User", backref="posts", lazy=True)
 
     def __repr__(self):
         return f"<Post {self.title})>"
+    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "content": self.content,
+            "user_id": self.user_id
+        }
+        

@@ -1,5 +1,5 @@
-from app.domain.user import User
-from app.infrastructure.database import db
+from domain.user import User
+from infrastructure.database import db
 
 
 class UserRepository:
