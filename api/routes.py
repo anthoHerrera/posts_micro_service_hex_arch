@@ -21,6 +21,13 @@ def create_user():
     user = user_service.create_user(data["name"], data["email"])
     return jsonify(user.to_dict()), 201
 
+@api_bp.route("/users/<int:user_id>", methods=["GET"])
+def get_user_by_id(user_id):
+    user = user_service.get_user_by_id(user_id)
+    if not user:
+        return jsonify({"error": "user not found"}), 404
+    return jsonify(user.to_dict()), 200
+
 @api_bp.route("/posts", methods=["POST"])
 def create_post():
     data  = request.json
@@ -28,3 +35,13 @@ def create_post():
         return jsonify({"error": "title, content and user_id are required"}), 400
     post = post_service.create_post(data["title"], data["content"], data["user_id"])
     return jsonify(post.to_dict()), 201
+
+@api_bp.route("/posts", methods=["GET"])
+def get_posts():
+    posts = post_service.get_posts()
+    return jsonify([post.to_dict() for post in posts]), 200
+
+@api_bp.route("/posts/<int:user_id>", methods=["GET"])
+def get_posts_by_user_id(user_id):
+    posts = post_service.get_posts_by_user_id(user_id)
+    return jsonify([post.to_dict() for post in posts]), 200

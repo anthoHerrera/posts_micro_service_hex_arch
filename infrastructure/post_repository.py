@@ -11,3 +11,7 @@ class PostRepository:
     def get_by_user_id(self, user_id: int) -> List[Post]:
         return Post.query.filter_by(user_id=user_id).all()
     
+    def get_all(self) -> List[Post]:
+        return Post.query.all()
+    
+    
