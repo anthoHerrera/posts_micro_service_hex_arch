@@ -1,15 +1,13 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 from infrastructure.database import Base
 from sqlalchemy.orm import relationship
-
 class Post(Base):
     __tablename__ = "posts"
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String)
     content = Column(String)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    author = relationship("User", backref="posts", lazy=True)
-
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"))
+    user = relationship("User", back_populates="posts")
     def __repr__(self):
         return f"<Post {self.title})>"
     
