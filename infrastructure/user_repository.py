@@ -11,3 +11,9 @@ class UserRepository:
     
     def get_by_email(self, email: str) -> User:
         return User.query.filter_by(email=email).first()
+    
+    def delete(self, user_id: int) -> None:
+        user = self.get_by_id(user_id=user_id)
+        if user:
+            db.session.delete(user)
+            db.session.commit()

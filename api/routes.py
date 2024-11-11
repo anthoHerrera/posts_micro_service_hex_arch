@@ -21,6 +21,15 @@ def get_user_by_id(user_id):
     if not user:
         return jsonify({"error": "user not found"}), 404
     return jsonify(user.to_dict()), 200
+
+@api_bp.route("/users/<int:user_id>", methods=["DELETE"])
+def delete_user(user_id):
+    user = user_service.get_user_by_id(user_id)
+    if not user:
+        return jsonify({"error": "user not found"}), 404
+    user_service.delete_user(user_id)
+    return jsonify({"message": "user deleted"}), 200
+
 @api_bp.route("/posts", methods=["POST"])
 def create_post():
     data  = request.json

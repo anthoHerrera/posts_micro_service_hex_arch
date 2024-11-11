@@ -13,3 +13,6 @@ class UserService:
     
     def get_user_by_email(self, email: str) -> List[User]:
         return self.user_repository.get_by_email(email)
+    
+    def delete_user(self, user_id: int) -> None:
+        self.user_repository.delete(user_id)
